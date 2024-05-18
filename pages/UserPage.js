@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import UserInfo from '../components/UserInfoContainer';
+import PostButton from '../components/CreatePost';
+import Collapsible from '../components/Collapsible';
 
 const UserPage = ({ route }) => {
   const { userToken, username } = route.params;
-  console.log(userToken);
-  console.log(username);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     fetchAllUsersData();
@@ -17,25 +19,27 @@ const UserPage = ({ route }) => {
             'Authorization': `Bearer ${userToken}`,
         }
       })
-        .then((response) => {console.log(response.status); return response.json()})
+        .then((response) => {
+          console.log(response.status); 
+          return response.json();
+        })
         .then((usersData) => {
           console.log(usersData);
-            let userData;
-
-            for (let user of usersData) {
-                if (user.username === username) {
-                    userData = user;
-                    console.log(userData);
-                }
-            }
-
+          const user = usersData.find(user => user.username === username);
+          if (user) {
+            setUserData(user);
+            console.log(user);
+          }
         })
         .catch((error) => console.error(error));
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Hi</Text>
+      {userData ? <UserInfo userDataInThePage={userData} /> : <Text>Loading User Data...</Text>}
+      <Collapsible title='Post'>
+        {userToken ? <PostButton userToken={userToken} /> : <Text>Loading Post Button...</Text> }
+      </Collapsible>
     </View>
   );
 };
@@ -44,8 +48,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
+    padding: '8%',
+    flexDirection: 'row',
   },
   heading: {
     fontSize: 24,
