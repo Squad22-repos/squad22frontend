@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/ce38b471-b1f4-4f70-9603-bee33ebcca25/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/squad22frontend-app",
+    "appService.deploySubpath": "."
+}
