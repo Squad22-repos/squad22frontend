@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native'; 
 import UserInfo from '../components/UserInfoContainer';
 import PostButton from '../components/CreatePost';
 import Collapsible from '../components/Collapsible';
+import CommunityButton from '../components/CreateCommunity';
+import PostSection from '../components/UserPostsSection';
 
 const UserPage = ({ route }) => {
   const { userToken, username } = route.params;
@@ -19,11 +21,8 @@ const UserPage = ({ route }) => {
             'Authorization': `Bearer ${userToken}`,
         }
       })
-        .then((response) => {
-          console.log(response.status); 
-          return response.json();
-        })
-        .then((usersData) => {
+        .then(response => response.json())
+        .then(usersData => {
           console.log(usersData);
           const user = usersData.find(user => user.username === username);
           if (user) {
@@ -31,31 +30,58 @@ const UserPage = ({ route }) => {
             console.log(user);
           }
         })
-        .catch((error) => console.error(error));
+        .catch(error => console.error(error));
   };
 
   return (
     <View style={styles.container}>
-      {userData ? <UserInfo userDataInThePage={userData} /> : <Text>Loading User Data...</Text>}
-      <Collapsible title='Post'>
-        {userToken ? <PostButton userToken={userToken} /> : <Text>Loading Post Button...</Text> }
-      </Collapsible>
+      <View style={styles.mainContent}>
+        <ScrollView>
+          <View style={styles.mainContentWrapper}>
+            {userData ? <UserInfo userDataInThePage={userData} /> : <Text>Loading User Data...</Text>}
+            {userData ? <PostSection userToken={userToken} userId={userData.id} username={userData.username} /> : <Text>Loading Post Data...</Text>}
+          </View>
+        </ScrollView>
+      </View>
+      <View style={styles.asideContainer}>
+        <ScrollView>
+          <View style={styles.aside}>
+            <Collapsible title='Post'>
+              {userToken ? <PostButton userToken={userToken} /> : <Text>Loading Post Button...</Text>}
+            </Collapsible>
+            <Collapsible title='Community'>
+              {userToken ? <CommunityButton userToken={userToken} /> : <Text>Loading Community Button...</Text>}
+            </Collapsible>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    padding: '8%',
     flexDirection: 'row',
+    height: '100vh',
   },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  mainContent: {
+    width: '80%',
+  },
+  mainContentWrapper: {
+    flexDirection: 'column',
+    padding: '2%',
+  },
+  asideContainer: {
+    width: '20%',
+    borderLeftWidth: 1,
+    borderLeftColor: '#ccc',
+  },
+  aside: {
+    alignItems: 'center',
+    padding: '2%',
+  },
+  component: {
+    marginBottom: 0,
   },
 });
 

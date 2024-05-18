@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import React from "react";
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import PostSection from './UserPostsSection';
 
 const UserInfo = ({ userDataInThePage }) => {
     const [specificInfo, setSpecificInfo] = useState(null);
@@ -26,9 +27,9 @@ const UserInfo = ({ userDataInThePage }) => {
           }
         };
     
-    return Object.keys(obj)
-        .map(key => `${key}: ${formatValue(obj[key])}`)
-        .join(', ');
+        return Object.keys(obj)
+            .map(key => `${key}: ${formatValue(obj[key])}`)
+            .join(', ');
     };
 
     const identifyUserType = () => {
@@ -45,9 +46,11 @@ const UserInfo = ({ userDataInThePage }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.username}>{ userDataInThePage.username }</Text>
-            <Text style={styles.fullName}>{ userDataInThePage.name }</Text>
-            <Text  style={styles.specificData}>{ specificInfo }</Text>
+            <ScrollView>
+                <Text style={styles.username}>{userDataInThePage.username}</Text>
+                <Text style={styles.fullName}>{userDataInThePage.name}</Text>
+                <Text style={styles.specificData}>{specificInfo}</Text>
+            </ScrollView>
         </View>
     );
 }
@@ -55,19 +58,21 @@ const UserInfo = ({ userDataInThePage }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        maxHeight: 200,
         backgroundColor: '#fff',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
+        overflow: 'hidden',
     }, 
     username: {
-        fontSize: '40px',
+        fontSize: 40,
         fontFamily: 'Calibri',
     }, 
     fullName: {
-        fontSize: '32px',
+        fontSize: 32,
     }, 
     specificData: {
-        fontSize: '24px'
+        fontSize: 24,
     }
 });
 

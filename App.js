@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { ScrollView } from 'react-native';
 import LoginScreen from './pages/Login';
 import RegisterScreen from './pages/Register';
 import UserPage from './pages/UserPage';

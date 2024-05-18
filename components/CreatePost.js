@@ -65,7 +65,7 @@ const PostButton = ({userToken}) => {
                 value={communityPostStatus}
                 placeholder="Post Status In Community"
             />
-            <Button title="Send Post" onPress={createPost} />
+            <Button style={styles.submitButton} title="Send Post" onPress={createPost} />
         </View>
     );
 }
@@ -84,6 +84,9 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       padding: 10,
     },
+    submitButton: {
+        margin: '4%'
+    }
 });
 
 export default PostButton;

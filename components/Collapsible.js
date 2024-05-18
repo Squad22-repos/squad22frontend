@@ -10,7 +10,7 @@ const Collapsible = ({ title, children }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TouchableOpacity onPress={toggleCollapsed} style={styles.collapsible}>
         <Text style={styles.collapsibleTitle}>{title}</Text>
       </TouchableOpacity>
@@ -20,16 +20,22 @@ const Collapsible = ({ title, children }) => {
 };
 
 const styles = StyleSheet.create({
-    collapsible: {
-        backgroundColor: '#61a4cdcf',
-        border: '2px solid black',
-        borderRadius: '8%',
-        },
-    collapsibleTitle: {
-        textAlign: 'center',
-        fontSize: '24px',
-        fontFamily: 'Arial',
-    }
+  container: {
+    alignItems: 'center'
+  },
+  collapsible: {
+    backgroundColor: '#61a4cdcf',
+    border: '2px solid black',
+    borderRadius: '8%',
+    marginTop: '4%',
+    marginBottom: '4%',
+    width: '100%',
+  },
+  collapsibleTitle: {
+    textAlign: 'center',
+    fontSize: '24px',
+    fontFamily: 'Arial',
+  }
 });
 
 export default Collapsible;
