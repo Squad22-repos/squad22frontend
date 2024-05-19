@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: '8%',
     marginTop: '4%',
     marginBottom: '4%',
-    width: '100%',
+    width: '132px',
   },
   collapsibleTitle: {
     textAlign: 'center',

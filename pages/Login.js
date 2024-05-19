@@ -7,21 +7,21 @@ const LoginScreen = ({ navigation }) => {
 
   const postLogin = () => {
     fetch('https://squad22-web-app-container.azurewebsites.net/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
     })
-      .then((response) => response.json())
-      .then((token) => {
+    .then((response) => response.json())
+    .then((token) => {
         console.log(token);
-        navigation.navigate('UserPage', { userToken : token.token, username : username });
+        navigation.navigate('UserPage', { userToken: token.token, username: username });
 
         setUsername('');
         setPassword('');
-      })
-      .catch((error) => console.error(error));
+    })
+    .catch((error) => console.error(error));
   };
 
   return (
@@ -41,7 +41,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <Button title="Login" onPress={postLogin} />
       <Button
-        title="Go to Register"
+        title="Create Account"
         onPress={() => navigation.navigate('Register')}
       />
     </View>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: '2%',
   },
   input: {
     height: 40,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native'; 
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import UserInfo from '../components/UserInfoContainer';
 import PostButton from '../components/CreatePost';
 import Collapsible from '../components/Collapsible';
@@ -11,8 +11,21 @@ const UserPage = ({ route }) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    fetchAllUsersData();
-  }, []);
+    fetch('https://squad22-web-app-container.azurewebsites.net/api/usuarios', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${userToken}`,
+        }
+      })
+        .then(response => response.json())
+        .then(usersData => {
+          const user = usersData.find(user => user.username === username);
+          if (user) {
+            setUserData(user);
+          }
+        })
+        .catch(error => console.error(error));
+  }, [username]); 
 
   const fetchAllUsersData = () => {
     fetch('https://squad22-web-app-container.azurewebsites.net/api/usuarios', {
@@ -39,7 +52,9 @@ const UserPage = ({ route }) => {
         <ScrollView>
           <View style={styles.mainContentWrapper}>
             {userData ? <UserInfo userDataInThePage={userData} /> : <Text>Loading User Data...</Text>}
-            {userData ? <PostSection userToken={userToken} userId={userData.id} username={userData.username} /> : <Text>Loading Post Data...</Text>}
+            <Collapsible title={`${username} Posts`}>
+              {userData ? <PostSection userToken={userToken} userId={userData.id} username={userData.username} /> : <Text>Loading Post Data...</Text>}
+            </Collapsible>
           </View>
         </ScrollView>
       </View>
