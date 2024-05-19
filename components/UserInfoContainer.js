@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import PostSection from './UserPostsSection';
 
 const UserInfo = ({ userDataInThePage }) => {
     const [specificInfo, setSpecificInfo] = useState(null);
@@ -9,7 +8,7 @@ const UserInfo = ({ userDataInThePage }) => {
 
     useEffect(() => {
         identifyUserType();
-    }, []);
+    }, [userDataInThePage]);
 
     const formatObject = (obj) => {
         const formatValue = (value) => {

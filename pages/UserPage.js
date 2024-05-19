@@ -10,41 +10,21 @@ const UserPage = ({ route }) => {
   const { userToken, username } = route.params;
   const [userData, setUserData] = useState(null);
 
+
   useEffect(() => {
-    fetch('https://squad22-web-app-container.azurewebsites.net/api/usuarios', {
+    fetch(`https://squad22-web-app-container.azurewebsites.net/api/usuarios/username/${username}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${userToken}`,
         }
       })
         .then(response => response.json())
-        .then(usersData => {
-          const user = usersData.find(user => user.username === username);
-          if (user) {
-            setUserData(user);
-          }
+        .then(user => {
+          console.log(user);
+          setUserData(user);
         })
         .catch(error => console.error(error));
   }, [username]); 
-
-  const fetchAllUsersData = () => {
-    fetch('https://squad22-web-app-container.azurewebsites.net/api/usuarios', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${userToken}`,
-        }
-      })
-        .then(response => response.json())
-        .then(usersData => {
-          console.log(usersData);
-          const user = usersData.find(user => user.username === username);
-          if (user) {
-            setUserData(user);
-            console.log(user);
-          }
-        })
-        .catch(error => console.error(error));
-  };
 
   return (
     <View style={styles.container}>

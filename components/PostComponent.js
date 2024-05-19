@@ -1,12 +1,15 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import Like from "./LikeButton";
 
-const Post = ({ postData }) => {
+const Post = ({ postData, userToken }) => {
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{postData.title}</Text>
             <Text style={styles.content}>{postData.content}</Text>
             <Text style={styles.likes}>Likes: {postData.likes}</Text>
+            <Like postId={postData.id} userToken={userToken} />
         </View>
     );
 }

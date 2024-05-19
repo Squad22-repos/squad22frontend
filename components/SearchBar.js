@@ -8,15 +8,14 @@ const SearchBar = ({ userToken }) => {
     const navigation = useNavigation();
 
     const findUser = () => {
-        fetch('https://squad22-web-app-container.azurewebsites.net/api/usuarios', {
+        fetch(`https://squad22-web-app-container.azurewebsites.net/api/usuarios/username/${searchSubject}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${userToken}`,
             }
             })
             .then(response => response.json())
-            .then(usersData => {
-                const user = usersData.find(user => user.username === searchSubject);
+            .then(user => {
                 if (user) {
                     navigation.navigate('UserPage', { userToken: userToken, username: searchSubject });
                 } else {

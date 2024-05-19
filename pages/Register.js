@@ -46,6 +46,8 @@ const RegisterScreen = ({ navigation }) => {
       body.services = services.split(',').map((item) => item.trim());
       body.opening = opening;
       body.closing = closing;
+    } else {
+      setAccountType('ADMIN');
     }
 
     fetch('https://squad22-web-app-container.azurewebsites.net/auth/register', {

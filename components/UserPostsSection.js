@@ -18,7 +18,7 @@ const PostSection = ({ userId, userToken, username }) => {
         })
         .then(response => response.json())
         .then(userPosts => {
-            setUserPosts(userPosts);
+            setUserPosts(userPosts.sort((a, b) => b.likes - a.likes));
         })
         .catch(error => console.error(error));
     };
@@ -28,7 +28,7 @@ const PostSection = ({ userId, userToken, username }) => {
             <Text style={styles.sectionTitle}>{username} Posts</Text>
             <ScrollView>
                 {userPosts && userPosts.map((post, index) => (
-                    <Post key={index} postData={post} />
+                    <Post key={index} postData={post} userToken={userToken} />
                 ))}
             </ScrollView>
         </View>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     sectionTitle: {
+        textAlign:'center',
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 16,

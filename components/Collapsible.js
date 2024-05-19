@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, LayoutAnimation, UIManager, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, LayoutAnimation, StyleSheet } from 'react-native';
 
 const Collapsible = ({ title, children }) => {
   const [collapsed, setCollapsed] = useState(true);
