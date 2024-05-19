@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#61a4cdcf',
     border: '2px solid black',
     borderRadius: '8%',
-    marginTop: '4%',
-    marginBottom: '4%',
-    width: '132px',
+    marginTop: '2%',
+    marginBottom: '2%',
+    width: '160px',
   },
   collapsibleTitle: {
     textAlign: 'center',

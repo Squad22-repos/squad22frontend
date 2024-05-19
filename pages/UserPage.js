@@ -5,6 +5,7 @@ import PostButton from '../components/CreatePost';
 import Collapsible from '../components/Collapsible';
 import CommunityButton from '../components/CreateCommunity';
 import PostSection from '../components/UserPostsSection';
+import CommunitySection from '../components/CommunitySection';
 
 const UserPage = ({ route }) => {
   const { userToken, username } = route.params;
@@ -32,8 +33,11 @@ const UserPage = ({ route }) => {
         <ScrollView>
           <View style={styles.mainContentWrapper}>
             {userData ? <UserInfo userDataInThePage={userData} /> : <Text>Loading User Data...</Text>}
-            <Collapsible title={`${username} Posts`}>
+            <Collapsible title={`Posts`}>
               {userData ? <PostSection userToken={userToken} userId={userData.id} username={userData.username} /> : <Text>Loading Post Data...</Text>}
+            </Collapsible>
+            <Collapsible title={`Communities`}>
+              {userData ? <CommunitySection userToken={userToken} userId={userData.id} username={userData.username} /> : <Text>Loading Community Data...</Text>}
             </Collapsible>
           </View>
         </ScrollView>
