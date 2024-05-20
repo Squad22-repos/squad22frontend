@@ -8,7 +8,7 @@ const SearchBar = ({ userToken }) => {
     const navigation = useNavigation();
 
     const findUser = () => {
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/usuarios/username/${searchSubject}`, {
+        fetch(`http://localhost:8000/api/usuarios/username/${searchSubject}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${userToken}`,

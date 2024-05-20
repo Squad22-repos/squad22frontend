@@ -6,7 +6,7 @@ const Like = ({ postId, userToken }) => {
     const [hasLiked, setHasLiked] = useState(false);
 
     const findPostInteraction = () => {
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/posts/interacao?postId=${postId}`, {
+        fetch(`http://localhost:8000/api/posts/interacao?postId=${postId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Like = ({ postId, userToken }) => {
             isLiked: isLiked,
             isCommented: false
         };
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/posts/interacao/${postId}`, {
+        fetch(`http://localhost:8000/api/posts/interacao/${postId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const Like = ({ postId, userToken }) => {
             isLiked: true,
             isCommented: false
         };
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/posts/interacao/${postId}`, {
+        fetch(`http://localhost:8000/api/posts/interacao/${postId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

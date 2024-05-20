@@ -57,7 +57,7 @@ const RegisterScreen = ({ navigation }) => {
       setAccountType('ADMIN');
     }
 
-    fetch('https://squad22-web-app-container.azurewebsites.net/auth/register', {
+    fetch('http://localhost:8000/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

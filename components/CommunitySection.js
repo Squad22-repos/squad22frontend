@@ -10,7 +10,7 @@ const CommunitySection = ({ userId, userToken, username }) => {
     }, []);
 
     const fetchAllUserCommunities = () => {
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/usuarios/${userId}/comunidades`, {
+        fetch(`http://localhost:8000api/usuarios/${userId}/comunidades`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${userToken}`,

@@ -13,7 +13,7 @@ const UserPage = ({ route }) => {
 
 
   useEffect(() => {
-    fetch(`https://squad22-web-app-container.azurewebsites.net/api/usuarios/username/${username}`, {
+    fetch(`http://localhost:8000/api/usuarios/username/${username}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${userToken}`,

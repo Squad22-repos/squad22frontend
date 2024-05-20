@@ -12,7 +12,7 @@ const PostButton = ({userToken}) => {
         let likes = 0;
 
         console.log(JSON.stringify({ title, content, likes, visibility, communityId, communityPostStatus }));
-        fetch('https://squad22-web-app-container.azurewebsites.net/api/posts', {
+        fetch('http://localhost:8000/api/posts', {
             method: 'POST',
             headers: {
             'Authorization': `Bearer ${userToken}`,

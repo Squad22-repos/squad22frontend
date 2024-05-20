@@ -10,7 +10,7 @@ const PostSection = ({ userId, userToken, username }) => {
     }, []);
 
     const fetchAllUserPosts = () => {
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/posts/usuario/${userId}`, {
+        fetch(`http://localhost:8000/api/posts/usuario/${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${userToken}`,

@@ -6,7 +6,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const postLogin = () => {
-    fetch('https://squad22-web-app-container.azurewebsites.net/auth/login', {
+    fetch('http://localhost:8000/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

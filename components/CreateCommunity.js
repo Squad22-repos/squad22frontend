@@ -12,7 +12,7 @@ const CommunityButton = ({userToken}) => {
         let creator = {id : creatorId};
 
         console.log(JSON.stringify({ creator, title, theme, description, visibility }));
-        fetch('https://squad22-web-app-container.azurewebsites.net/api/comunidades', {
+        fetch('http://localhost:8000/api/comunidades', {
             method: 'POST',
             headers: {
             'Authorization': `Bearer ${userToken}`,
