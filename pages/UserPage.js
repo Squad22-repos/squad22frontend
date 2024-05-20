@@ -55,7 +55,7 @@ const UserPage = ({ route }) => {
         </ScrollView>
       </View>
       <View style={styles.asideContainer}>
-        <ScrollView style={styles.fullHeightScroll}>
+        <ScrollView>
           <View style={styles.aside}>
             <Collapsible title="Post">
               {userToken ? <PostButton userToken={userToken} /> : <Text>Loading Post Button...</Text>}
@@ -86,9 +86,6 @@ const styles = StyleSheet.create({
     width: '20%',
     borderLeftWidth: 1,
     borderLeftColor: '#ccc',
-  },
-  fullHeightScroll: {
-    flex: 1,
   },
   aside: {
     alignItems: 'center',
