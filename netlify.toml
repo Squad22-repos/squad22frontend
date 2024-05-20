@@ -1,0 +1,3 @@
+[build]
+  command = "npm install --global eas-cli && eas-build"
+  publish = "web-build"
