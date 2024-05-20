@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Like = ({ postId, userToken }) => {
     const [hasLiked, setHasLiked] = useState(false);
@@ -88,7 +88,7 @@ const Like = ({ postId, userToken }) => {
 
     return (
         <TouchableOpacity onPress={findPostInteraction}>
-            <Icon name="arrow-up-outline" size={20} color="#000" />
+            <Ionicons name="arrow-up-outline" size={20} color="#000" />
         </TouchableOpacity>
     );
 };
