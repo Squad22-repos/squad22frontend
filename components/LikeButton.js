@@ -4,11 +4,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const Like = ({ postId, userToken }) => {
     const [hasLiked, setHasLiked] = useState(false);
-    let action = hasLiked ? "unlike" : "like";
-    let interactionObj = { actionType: action, actionStatus: null, isLiked: !hasLiked, isCommented: false };
 
     const findPostInteraction = () => {
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/posts/interacao?postId=${postId}`, {
+        fetch(`http://localhost:8000/api/posts/interacao?postId=${postId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,31 +15,28 @@ const Like = ({ postId, userToken }) => {
         })
         .then(response => {
             if (!response.ok) {
+                postInteraction();
                 throw new Error('Network response was not ok');
             }
-            return response.text();
+            return response.json();
         })
-        .then(text => {
-            let data;
-            try {
-                data = text ? JSON.parse(text) : null;
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-                throw new Error('Invalid JSON response');
-            }
-
+        .then(data => {
             if (data) {
-                interactionObj.isLiked = !data.isLiked;
-                updateInteraction();
-            } else {
-                postInteraction();
+                console.log(data);
+                updateInteraction(!data.isLiked);
             }
         })
         .catch(error => console.error('Fetch error:', error));
     };
 
-    const updateInteraction = () => {
-        fetch(`https://squad22-web-app-container.azurewebsites.net/api/posts/interacao/${postId}`, {
+    const updateInteraction = (isLiked) => {
+        const interactionObj = {
+            actionType: isLiked ? "like" : "unlike",
+            actionStatus: '',
+            isLiked: isLiked,
+            isCommented: false
+        };
+        fetch(`http://localhost:8000/api/posts/interacao/${postId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,18 +46,25 @@ const Like = ({ postId, userToken }) => {
         })
         .then(response => {
             if (!response.ok) {
+                console.log(response);
                 throw new Error('Network response was not ok');
             }
             return response.json();
         })
         .then(data => {
             console.log(data);
-            setHasLiked(!hasLiked);
+            setHasLiked(isLiked);
         })
         .catch(error => console.error('Fetch error:', error));
     };
 
     const postInteraction = () => {
+        const interactionObj = {
+            actionType: "like",
+            actionStatus: '',
+            isLiked: true,
+            isCommented: false
+        };
         fetch(`https://squad22-web-app-container.azurewebsites.net/api/posts/interacao/${postId}`, {
             method: 'POST',
             headers: {
@@ -79,7 +81,7 @@ const Like = ({ postId, userToken }) => {
         })
         .then(data => {
             console.log(data);
-            setHasLiked(!hasLiked);
+            setHasLiked(true);
         })
         .catch(error => console.error('Fetch error:', error));
     };
