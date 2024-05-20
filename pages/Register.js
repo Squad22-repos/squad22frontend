@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Picker, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Modal, FlatList, StatusBar } from 'react-native';
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -15,6 +15,13 @@ const RegisterScreen = ({ navigation }) => {
   const [services, setServices] = useState('');
   const [opening, setOpening] = useState('');
   const [closing, setClosing] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const accountTypes = [
+    { label: 'Estudante', value: 'ESTUDANTE' },
+    { label: 'Professor', value: 'PROFESSOR' },
+    { label: 'Comercial', value: 'COMERCIAL' },
+  ];
 
   const postRegister = () => {
     const body = {
@@ -108,15 +115,32 @@ const RegisterScreen = ({ navigation }) => {
           value={registration}
           placeholder="Registration"
         />
-        <Picker
-          selectedValue={accountType}
-          style={styles.input}
-          onValueChange={(itemValue) => setAccountType(itemValue)}
-        >
-          <Picker.Item label="Estudante" value="ESTUDANTE" />
-          <Picker.Item label="Professor" value="PROFESSOR" />
-          <Picker.Item label="Comercial" value="COMERCIAL" />
-        </Picker>
+        <TouchableOpacity style={styles.dropdown} onPress={() => setIsModalVisible(true)}>
+          <Text style={styles.dropdownText}>
+            {accountType ? accountTypes.find((item) => item.value === accountType).label : 'Select account type'}
+          </Text>
+        </TouchableOpacity>
+        <Modal visible={isModalVisible} transparent animationType="slide">
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <FlatList
+                data={accountTypes}
+                keyExtractor={(item) => item.value}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.modalItem}
+                    onPress={() => {
+                      setAccountType(item.value);
+                      setIsModalVisible(false);
+                    }}
+                  >
+                    <Text style={styles.modalItemText}>{item.label}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+          </View>
+        </Modal>
         {accountType === 'ESTUDANTE' && (
           <>
             <TextInput
@@ -196,7 +220,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
   },
   input: {
     height: 40,
@@ -205,11 +228,38 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  dropdown: {
+    height: 40,
+    width: 200,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    justifyContent: 'center',
+  },
+  dropdownText: {
+    fontSize: 16,
+  },
   formContainer: {
-    display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column',
     margin: '5%',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    width: 250,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 10,
+  },
+  modalItem: {
+    padding: 10,
+  },
+  modalItemText: {
+    fontSize: 18,
   },
 });
 

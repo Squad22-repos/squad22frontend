@@ -32,12 +32,24 @@ const UserPage = ({ route }) => {
       <View style={styles.mainContent}>
         <ScrollView>
           <View style={styles.mainContentWrapper}>
-            {userData ? <UserInfo userDataInThePage={userData} /> : <Text>Loading User Data...</Text>}
-            <Collapsible title={`Posts`}>
-              {userData ? <PostSection userToken={userToken} userId={userData.id} username={userData.username} /> : <Text>Loading Post Data...</Text>}
+            {userData ? (
+              <UserInfo userDataInThePage={userData} />
+            ) : (
+              <Text>Loading User Data...</Text>
+            )}
+            <Collapsible title="Posts">
+              {userData ? (
+                <PostSection userToken={userToken} userId={userData.id} username={userData.username} />
+              ) : (
+                <Text>Loading Post Data...</Text>
+              )}
             </Collapsible>
-            <Collapsible title={`Communities`}>
-              {userData ? <CommunitySection userToken={userToken} userId={userData.id} username={userData.username} /> : <Text>Loading Community Data...</Text>}
+            <Collapsible title="Communities">
+              {userData ? (
+                <CommunitySection userToken={userToken} userId={userData.id} username={userData.username} />
+              ) : (
+                <Text>Loading Community Data...</Text>
+              )}
             </Collapsible>
           </View>
         </ScrollView>
@@ -45,10 +57,10 @@ const UserPage = ({ route }) => {
       <View style={styles.asideContainer}>
         <ScrollView style={styles.fullHeightScroll}>
           <View style={styles.aside}>
-            <Collapsible title='Post'>
+            <Collapsible title="Post">
               {userToken ? <PostButton userToken={userToken} /> : <Text>Loading Post Button...</Text>}
             </Collapsible>
-            <Collapsible title='Community'>
+            <Collapsible title="Community">
               {userToken ? <CommunityButton userToken={userToken} /> : <Text>Loading Community Button...</Text>}
             </Collapsible>
           </View>
@@ -61,7 +73,7 @@ const UserPage = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: '100vh',
+    height: '100%',
   },
   mainContent: {
     width: '80%',

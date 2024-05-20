@@ -43,15 +43,20 @@ const SearchBar = ({ userToken }) => {
 const styles = StyleSheet.create({
     searchContainer: {
         flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 10,
     },
     input: {
-        flex: 1,
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        paddingLeft: 8,
+        borderRadius: 5,
+        marginRight: 8,
+        width: 200,
     },
     searchButton: {
         padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });
-
 export default SearchBar;

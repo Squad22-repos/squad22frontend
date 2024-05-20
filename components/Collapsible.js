@@ -21,21 +21,22 @@ const Collapsible = ({ title, children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   collapsible: {
     backgroundColor: '#61a4cdcf',
-    border: '2px solid black',
-    borderRadius: '8%',
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 8,
     marginTop: '2%',
     marginBottom: '2%',
-    width: '160px',
+    width: 160,
   },
   collapsibleTitle: {
     textAlign: 'center',
-    fontSize: '24px',
+    fontSize: 24,
     fontFamily: 'Arial',
-  }
+  },
 });
 
 export default Collapsible;

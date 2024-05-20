@@ -18,7 +18,7 @@ const App = () => {
                     name="UserPage" 
                     component={UserPage} 
                     options={({ route }) => ({ 
-                        headerTitle: (props) => <SearchBar userToken={route.params?.userToken} {...props} /> 
+                        headerRight: () => <SearchBar userToken={route.params?.userToken} />
                     })} 
                 />
             </Stack.Navigator>

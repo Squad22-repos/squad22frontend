@@ -37,12 +37,6 @@ const CommunityButton = ({userToken}) => {
         <View style={styles.container}>
             <TextInput
                 style={styles.input}
-                onChangeText={setCreatorId}
-                value={creatorId}
-                placeholder="Community Creator ID"
-            />
-            <TextInput
-                style={styles.input}
                 onChangeText={setTitle}
                 value={title}
                 placeholder="Community Title"
