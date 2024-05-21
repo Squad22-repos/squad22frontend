@@ -25,7 +25,6 @@ const PostSection = ({ userId, userToken, username }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.sectionTitle}>{username} Posts</Text>
             <ScrollView>
                 {userPosts && userPosts.map((post, index) => (
                     <Post key={index} postData={post} userToken={userToken} />

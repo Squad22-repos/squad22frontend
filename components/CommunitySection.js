@@ -26,7 +26,6 @@ const CommunitySection = ({ userId, userToken, username }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.sectionTitle}>{username} Communities</Text>
             <ScrollView>
                 {userCommunities && userCommunities.map((community, index) => (
                     <Community key={index} communityData={community} userToken={userToken} />
