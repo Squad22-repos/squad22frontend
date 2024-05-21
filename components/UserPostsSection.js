@@ -10,7 +10,7 @@ const PostSection = ({ userId, userToken, username }) => {
     }, []);
 
     const fetchAllUserPosts = () => {
-        fetch(`http://localhost:8000/api/posts/usuario/${userId}`, {
+        fetch(`http://localhost:8000/api/posts/usuario/${username}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${userToken}`,
