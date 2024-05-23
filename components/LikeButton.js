@@ -24,8 +24,6 @@ const Like = ({ postId, userToken }) => {
             if (data) {
                 console.log(data);
                 updateInteraction(!data.isLiked);
-            } else {
-                postInteraction();
             }
         })
         .catch(error => {postInteraction(); console.error('Fetch error:', error)});
